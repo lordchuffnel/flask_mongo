@@ -5,4 +5,7 @@ def create_app():
 
   app.config.from_pyfile('settings.py')
 
+  from user.views import user_app
+  app.register_blueprint(user_app)
+
   return app
