@@ -1,14 +1,16 @@
 from flask_wtf import Form
 from wtforms import PasswordField, StringField, validators
 from wtforms.fields.html5 import EmailField
-from wtforms.validators import DataRequired
+from wtforms.validators import ValidationError
+
+from user.models import User
 
 
 class RegisterForm(Form):
   first_name = StringField('First Name', [validators.Required()])
   last_name = Stringfield('Last Name', [validators.Required()])
   email = EmailField('Email Address', [
-    validators = DataRequired(),
+    validators.DataRequired(),
     validators.Email()
   ])
   username = StringField('Username', [
@@ -21,3 +23,11 @@ class RegisterForm(Form):
     validators.length(min=4, max=80)
   ])
   confirm = PasswordField('Repeat Password')
+
+  def validate_username(form, field):
+    if User.objects.filter(username=field.data).first():
+      raise ValidationError('Username already exists')
+
+  def validate_email(form, field):
+    if User.objects.filter(email=field.data).first():
+      raise ValidationError("Email is already in use")
