@@ -1,8 +1,10 @@
-from application import create_app as create_app_base
-from mongoengine import get_db
 import unittest
 
+from mongoengine import get_db
+
+from application import create_app as create_app_base
 from user.models import User
+
 
 class UserTest(unittest.TestCase):
 
@@ -20,7 +22,7 @@ class UserTest(unittest.TestCase):
 
   def tearDown(self):
     db = get_db
-    db.client.drop_databae(db)
+    db.client.drop_database(db)
 
   def test_register_user(self):
     # basic registration
@@ -32,4 +34,4 @@ class UserTest(unittest.TestCase):
       password='test123',
       confirm='test123'
     ), follow_redirects=True)
-    assert User.objects.filter(username='frank').count() == 1
+    assert User.objects.filter(username='frank') == 1

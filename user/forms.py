@@ -8,7 +8,7 @@ from user.models import User
 
 class RegisterForm(Form):
   first_name = StringField('First Name', [validators.Required()])
-  last_name = Stringfield('Last Name', [validators.Required()])
+  last_name = StringField('Last Name', [validators.Required()])
   email = EmailField('Email Address', [
     validators.DataRequired(),
     validators.Email()

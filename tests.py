@@ -6,5 +6,5 @@ import unittest
 
 from user.tests import UserTest
 
-if __name__ = '__main__':
+if __name__ == '__main__':
   unittest.main()
